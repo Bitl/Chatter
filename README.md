@@ -44,7 +44,7 @@ The Protodef file has the following methods and types, which are managed by both
 -	MessageList – This is where the list of messages is considered when sending it between both the client and server.
 
 ### ChatterServerService
-	ChatterServerService is a barebones gRPC server that has a separate service for handling the following methods from the Protodef file:
+ChatterServerService is a barebones gRPC server that has a separate service for handling the methods/objects from the Protodef file.
 When a client sends a message, it sends a request to send a message with the SendMessage method. The message will be properly formatted, logged on the server, and stored in the internal persistent storage object. This storage object is a List<string> named ServerVars.messageStorage which stores the text of all messages. When the client asks for a server update with the UpdateSubscriptions request, the contents of the ServerVars.messageStorage object will be put in a MessageList object and sent over to the client as a response.
 
 ### ChatterClient
