@@ -1,0 +1,41 @@
+﻿<Window x:Class="ChatterClient.ChatWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChatterClient"
+        mc:Ignorable="d"
+        Title="Chatter" Height="450" Width="800" Background="#FFADADAD" Loaded="Window_Loaded" Closing="Window_Closing" WindowStartupLocation="CenterScreen" MinWidth="800" MinHeight="450">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/ChatterStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="72*"/>
+            <ColumnDefinition Width="643*"/>
+            <ColumnDefinition Width="85*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="387*"/>
+            <RowDefinition Height="47*"/>
+        </Grid.RowDefinitions>
+        <ListBox Style="{StaticResource ChatterListBox}" x:Name="messageListBox" Grid.ColumnSpan="3">
+        </ListBox>
+
+        <TextBox Style="{StaticResource ChatterTextBox}" x:Name="messageBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" TextWrapping="Wrap" Grid.Column="1" KeyDown="Window_KeyDown"/>
+        <Button Style="{StaticResource ChatterSendButton}" x:Name="sendButton" Grid.Column="2" Content="➤" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="sendButton_Click"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="28*"/>
+                <RowDefinition Height="19*"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="LoggedInInfoLabel" Content="Logged in:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" Width="66"/>
+            <Label x:Name="UsernameLabel" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="2" Margin="0,21,0,0" Height="26" Width="Auto"/>
+        </Grid>
+    </Grid>
+</Window>
