@@ -13,7 +13,7 @@ Install-Package Google.Protobuf
 Install-Package Grpc.Tools
 ```
 
-Afterwards, simply build it like you would with other .NET projects. Built with .NET 8.0 and tested primarily on Windows 10.
+Afterwards, simply build it like you would with other .NET projects. Built with .NET 8.0 and Visual Studio 2022 and tested primarily on Windows 10.
 
 # How to use (pulled from the original assignment)
 Chatter is a basic chat program that uses gRPC to deliver an easy to use and responsive chat experience. The chat program allows users to connect to a separate Chatter server and talk with other users. This manual will showcase how to set up Chatter locally with a single user or multiple users, as well as discuss about how it functions.
