@@ -45,7 +45,10 @@ The Protodef file has the following methods and types, which are managed by both
 
 ### ChatterServerService
 ChatterServerService is a barebones gRPC server that has a separate service for handling the methods/objects from the Protodef file.
-When a client sends a message, it sends a request to send a message with the SendMessage method. The message will be properly formatted, logged on the server, and stored in the internal persistent storage object. This storage object is a List<string> named ServerVars.messageStorage which stores the text of all messages. When the client asks for a server update with the UpdateSubscriptions request, the contents of the ServerVars.messageStorage object will be put in a MessageList object and sent over to the client as a response.
+
+- When a client sends a message, it sends a request to send a message with the SendMessage method.
+- The message will be properly formatted, logged on the server, and stored in the internal persistent storage object. This storage object is a List<string> named ServerVars.messageStorage which stores the text of all messages.
+- When the client asks for a server update with the UpdateSubscriptions request, the contents of the ServerVars.messageStorage object will be put in a MessageList object and sent over to the client as a response.
 
 ### ChatterClient
 When starting up the client, a login page opens. After entering the necessary information, the program will ping the server with the Ping message to check if it is functional. If it is, it will start the main chat client window. If not, it’ll show an error message saying that it cannot connect to the server.
