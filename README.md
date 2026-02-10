@@ -4,6 +4,9 @@ I decided to upload this for those who want it as a resource.
 
 This is mostly the full, unedited code with personal information removed.
 
+![Image 1](https://github.com/Bitl/Chatter/blob/main/images/M0iqMQEp9Y.png?raw=true)
+![Image 2](https://github.com/Bitl/Chatter/blob/main/images/ChatterClient_1t397bfWng.png?raw=true)
+
 # Building
 Install the following packages:
 
