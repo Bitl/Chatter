@@ -26,25 +26,25 @@ Chatter uses the following OOP principles:
 -	Polymorphism (The program has some methods that override others in both the server and the client. The server inherits the Chatter.ChatterBase class and overrides it.)
 -	Encapsulation (Used to hide variables that should not be used by other classes, such as the server logger and the client’s Chatter.ChatterClient object.)
 
-##How does Chatter work?
+## How does Chatter work?
 Chatter is composed of two main components: the ChatterClient and the ChatterServerService. The ChatterClient is the actual chat client, and the ChatterServerService runs the server backend. They both share a basic definition of things transferred over the network, known as a .proto file or Protodef file. The definition is then generated into normal C# code, which is saved in the ChatterShared.dll shared by both components. 
 Here is a full documentation of how both components work.
 The Protodef file has the following methods and types, which are managed by both components:
 
-###Methods:
+### Methods:
 -	SendMessage, sends the message
 -	UpdateSubscriptions, updates the client with new messages
 -	Ping, used by the Login Page and the chat client itself to see if the server is active and listening to client requests.
 
-###Types:
+### Types:
 -	Message – A basic message, containing the username and the text of the message. This is also used for pinging the server.
 -	MessageList – This is where the list of messages is considered when sending it between both the client and server.
 
-###ChatterServerService
+### ChatterServerService
 	ChatterServerService is a barebones gRPC server that has a separate service for handling the following methods from the Protodef file:
 When a client sends a message, it sends a request to send a message with the SendMessage method. The message will be properly formatted, logged on the server, and stored in the internal persistent storage object. This storage object is a List<string> named ServerVars.messageStorage which stores the text of all messages. When the client asks for a server update with the UpdateSubscriptions request, the contents of the ServerVars.messageStorage object will be put in a MessageList object and sent over to the client as a response.
 
-###ChatterClient
+### ChatterClient
 When starting up the client, a login page opens. After entering the necessary information, the program will ping the server with the Ping message to check if it is functional. If it is, it will start the main chat client window. If not, it’ll show an error message saying that it cannot connect to the server.
 The client gets updates from the server in a couple ways:
 1.	A task is run upon starting up the server, calling the Update() function every 0.2 seconds (every 200 ticks), which tells the client to send a UpdateSubscriptions event to the server, then updates a ListBox object to show the latest list of messages from the server. The Update function also manages any connection exceptions.
@@ -54,7 +54,7 @@ If there’s any issues with the client that results in a disconnection from the
 When a message is sent, it will send a SendMessage request and then call the Update() function to update the message list. 
 If the list of messages is updated in any way, the client will scroll down to the latest message if the message panel is already scrolled all the way down.
 
-##How does one get Chatter working with a single user?
+## How does one get Chatter working with a single user?
 Getting Chatter to work is incredibly simple. For this guide, we’re going to do it all locally, but this can apply if you have an online server you’d like to connect to. The local setup involves the following steps:
 1.	Open the ChatterServerService either through Visual Studio by selecting the ChatterServerService as a startup item and then running it without debugging, or by launching the pre-compiled file in Chatter/ChatterServerService/bin/Debug/net8.0/ChatterServerService.exe or Chatter/ChatterServerService/bin/Release/net8.0/ChatterServerService.exe. If you’re trying to host a server for others to join and the listed port is forwarded, congrats, you got one open!
 2.	Launch the ChatterClient either through Visual Studio by selecting the ChatterClient as a startup item and then running it without debugging, or by launching the pre-compiled file in Chatter/ChatterClient/bin/Debug/net8.0-windows/ChatterClient.exe or Chatter/ChatterClient/bin/Release/net8.0-windows/ChatterClient.exe
@@ -63,7 +63,7 @@ Getting Chatter to work is incredibly simple. For this guide, we’re going to d
 5.	The User Name may be changed to whatever you wish. For this, I will use the name “User.” Now, just click “Log In.” The button text should change to “Connecting” and it will later show the Chatter Chat window, as seen below. The server will then show repeated instances of the client requesting message updates, and the contents of the server message storage.
 6.	Simply type in a message, press enter or the send button/ button with an arrow on it, and it will be sent to the server and show up in the chat program!
  
-##How does one get Chatter working with multiple users?
+## How does one get Chatter working with multiple users?
 Chatter allows for multiple clients to use one server, and the message history to be carried between them all as long as the server is open. For this guide, we will re-use the local server we made in the first part.
 
 1. Open up a second ChatterClient instance, and set the “Server Port” to the same one you specified in the first instance, and change the username to something else to separate it from the first instance.
